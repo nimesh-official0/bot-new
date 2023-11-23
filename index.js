@@ -6,7 +6,7 @@ botBaileys.on('auth_failure', async (error) => console.log("ERROR BOT: ", error)
 botBaileys.on('qr', (qr) => console.log("NEW QR CODE: ", qr));
 botBaileys.on('ready', async () => console.log('READY BOT'))
 
-let awaitingResponse = false;
+let awaitingResponse = true;
 
 botBaileys.on('message', async (message) => {
     if (!awaitingResponse) {
@@ -20,6 +20,7 @@ botBaileys.on('message', async (message) => {
         switch (command) {
             case 'text':
                 await botBaileys.sendText(message.from, 'Hello world');
+                await console.log('READY BOT')
                 break;
             case 'media':
                 await botBaileys.sendMedia(message.from, 'https://www.w3schools.com/w3css/img_lights.jpg', 'Hello world');
@@ -34,6 +35,6 @@ botBaileys.on('message', async (message) => {
                 await botBaileys.sendText(message.from, 'Sorry, I did not understand that command. Please select an option from the poll.');
                 break;
         }
-        awaitingResponse = false;
+        awaitingResponse = true;
     }
 });
